@@ -29,7 +29,8 @@ class Adaptador (var Datos: List<tbticket>): RecyclerView.Adapter<ViewHolder>() 
     }
     fun actualizarpantalla (numeroticket: String, nuevonombre: String){
         val index =Datos.indexOfFirst{it.txtnumero == numeroticket}
-        notifyDataSetChanged()
+        Datos[index].txttitulo = nuevonombre
+        notifyItemChanged(index)
     }
 
     fun eliminardatos(numeroticket: String, position: Int) {
@@ -70,11 +71,13 @@ class Adaptador (var Datos: List<tbticket>): RecyclerView.Adapter<ViewHolder>() 
             updateticket.setString(2, numeroticket)
             updateticket.executeUpdate()
 
+            val commit = objConexion.prepareStatement("commit")!!
+            commit.executeUpdate()
+
             withContext(Dispatchers.Main){
                 actualizarpantalla( nuevonombre, numeroticket)
 
-                val commit = objConexion.prepareStatement("commit")!!
-                commit.executeUpdate()
+
             }
         }
 

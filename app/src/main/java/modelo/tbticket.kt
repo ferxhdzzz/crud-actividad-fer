@@ -7,7 +7,7 @@ import java.util.UUID
 
 data class tbticket(
     val txtnumero: String,
-    val txttitulo: String,
+    var txttitulo: String,
     val txtdesc: String,
     val txtautor: String,
     val txtemail: String,
