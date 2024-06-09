@@ -15,6 +15,12 @@
         android:theme="@style/Theme.CrudFernadaActividad"
         tools:targetApi="31">
         <activity
+            android:name=".detallehelpdesk"
+            android:exported="false" />
+        <activity
+            android:name=".item_card"
+            android:exported="false" />
+        <activity
             android:name=".helpdesk"
             android:exported="false" />
         <activity

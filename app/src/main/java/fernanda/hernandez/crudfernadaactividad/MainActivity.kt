@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val txtregistrarse = findViewById<TextView>(R.id.txtregistrarse)
 
         btnlogin.setOnClickListener{
-            CoroutineScope(Dispatchers.Main).launch{
+            CoroutineScope(Dispatchers.IO).launch{
                 val objconexion = claseconexion().cadenaconexion()
                 val addusuario = objconexion?.prepareStatement("insert into usuariosss (UUID, nombre, contraseña) values(?, ?, ?)")!!
                 addusuario.setString(1,UUID.randomUUID().toString())
@@ -47,6 +47,13 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        txtregistrarse.setOnClickListener {
+
+            val registro = Intent(this, registro::class.java)
+            startActivity(registro)
+        }
+
 
     }
 
