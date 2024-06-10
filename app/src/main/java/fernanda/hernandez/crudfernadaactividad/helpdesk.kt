@@ -29,6 +29,7 @@ class helpdesk : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         val txtnumero = findViewById<TextView>(R.id.txtnumero)
         val txttitulo = findViewById<TextView>(R.id.txttitulo)
         val txtdesc = findViewById<TextView>(R.id.txtdescripcion)
@@ -54,6 +55,7 @@ class helpdesk : AppCompatActivity() {
 
             //recorro todos los registros de la base de datos
             while (resulSet.next())  {
+
                 val numero = resulSet.getString("numeroticket")
                 val titulo = resulSet.getString("tituloticket")
                 val desc = resulSet.getString("descripcion")
@@ -82,15 +84,16 @@ class helpdesk : AppCompatActivity() {
         btnagregar.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch{
                 val objconexion = claseconexion().cadenaconexion()
-                val addticket = objconexion?.prepareStatement("insert into ticket (numeroticket, tituloticket, descripcion, autor, email, fechacreacion, estado, fechafinalizacion) values(?, ?, ?, ?, ?, ?, ?, ?)")!!
-                addticket.setString(1, txtnumero.text.toString())
-                addticket.setString(2,txttitulo.text.toString())
-                addticket.setString(3,txtdesc.text.toString())
-                addticket.setString(4, txtautor.text.toString())
-                addticket.setString(5,txtemail.text.toString())
-                addticket.setString(6,txtfechacracion.text.toString())
-                addticket.setString(7, txtestado.text.toString())
-                addticket.setString(8,txtfechafinal.text.toString())
+                val addticket = objconexion?.prepareStatement("insert into ticket (UUID, numeroticket, tituloticket, descripcion, autor, email, fechacreacion, estado, fechafinalizacion) values(?, ?, ?, ?, ?, ?, ?, ?)")!!
+                addticket.setString(1, UUID.randomUUID().toString())
+                addticket.setString(2, txtnumero.text.toString())
+                addticket.setString(3,txttitulo.text.toString())
+                addticket.setString(4,txtdesc.text.toString())
+                addticket.setString(5, txtautor.text.toString())
+                addticket.setString(6,txtemail.text.toString())
+                addticket.setString(7,txtfechacracion.text.toString())
+                addticket.setString(8, txtestado.text.toString())
+                addticket.setString(9,txtfechafinal.text.toString())
                 addticket.executeUpdate()
 
                 val nuevoticket =  obtenerdatos()

@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.util.UUID
 
 class detallehelpdesk : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,7 @@ class detallehelpdesk : AppCompatActivity() {
         val txtfechacracion = findViewById<TextView>(R.id.fechacreaciondetalle)
         val txtestado = findViewById<TextView>(R.id.estadodetalle)
         val txtfechafinal = findViewById<TextView>(R.id.fechafinaldetalle)
+
 
         txtnumero.text = numero
         txttitulo.text = nombrenuevo

@@ -27,7 +27,7 @@ class Adaptador (var Datos: List<tbticket>): RecyclerView.Adapter<ViewHolder>() 
 
 
     }
-    fun actualizarpantalla (numeroticket: String, nuevonombre: String){
+    fun actualizarpantalla (numeroticket:String, nuevonombre: String){
         val index =Datos.indexOfFirst{it.txtnumero == numeroticket}
         Datos[index].txttitulo = nuevonombre
         notifyItemChanged(index)
@@ -66,7 +66,7 @@ class Adaptador (var Datos: List<tbticket>): RecyclerView.Adapter<ViewHolder>() 
             val objConexion = claseconexion().cadenaconexion()
 
             //VAIRABLE QUE TENGA UN PREPARESTATEMENT
-            val updateticket = objConexion?.prepareStatement("update ticket set numeroticket = ? where numeroticket = ?")!!
+            val updateticket = objConexion?.prepareStatement("update ticket set tituloticket = ? where numeroticket = ?")!!
             updateticket.setString(1, nuevonombre)
             updateticket.setString(2, numeroticket)
             updateticket.executeUpdate()
@@ -75,7 +75,7 @@ class Adaptador (var Datos: List<tbticket>): RecyclerView.Adapter<ViewHolder>() 
             commit.executeUpdate()
 
             withContext(Dispatchers.Main){
-                actualizarpantalla( nuevonombre, numeroticket)
+                actualizarpantalla(numeroticket,nuevonombre)
 
 
             }
@@ -83,7 +83,7 @@ class Adaptador (var Datos: List<tbticket>): RecyclerView.Adapter<ViewHolder>() 
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-     val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_item_card, parent, false)
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_item_card, parent, false)
         return ViewHolder(vista)
     }
 
@@ -91,7 +91,7 @@ class Adaptador (var Datos: List<tbticket>): RecyclerView.Adapter<ViewHolder>() 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
       val item = Datos [position]
-        holder.txtcard.text = item.txtnumero
+        holder.txtcard.text = item.txttitulo
 
         holder.imgborrar.setOnClickListener {
             val context = holder.itemView.context
@@ -139,7 +139,6 @@ class Adaptador (var Datos: List<tbticket>): RecyclerView.Adapter<ViewHolder>() 
         holder.itemView.setOnClickListener(){
             val context = holder.itemView.context
 
-            //cambiar pantalla
             val pantalladetalle = Intent(context, detallehelpdesk::class.java)
 
             pantalladetalle.putExtra("numeroticket", item.txtnumero)
